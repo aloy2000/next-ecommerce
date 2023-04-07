@@ -11,9 +11,10 @@ import Image from "next/image"
 import Logo from "../../../../ressources/img/logo.jpg"
 import CartContext from "@/Context/CartContext"
 
-const Header = () => {
-  const { cartState } = useContext(CartContext)
 
+
+const Header = (props) => {
+  const { cartState } = useContext(CartContext)
   const itemCount = cartState.items.reduce((total, item) => {
     return total + item.quantity
   }, 0)

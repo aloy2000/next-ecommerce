@@ -7,7 +7,7 @@ import axios from 'axios'
 
 export const ProfilForm = ({ initialValues }) => {
 
-    const handleSubmit = async (values, {  setSubmitting }) => {
+    const handleSubmit = async (values, { setSubmitting }) => {
         console.log("values", values);
         try {
             await axios.post('http://localhost:3000/api/user', {
@@ -34,8 +34,45 @@ export const ProfilForm = ({ initialValues }) => {
         <Formik
             initialValues={initialValues}
             //validationSchema={validationSchema}
+            validate={values => {
+                const errors = {};
+                if (!values.email) {
+                    errors.email = 'Champ obligatoire';
+                } else if (
+                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                ) {
+                    errors.email = 'Invalid email address';
+                }
+                if (!values.password) {
+                    errors.password = 'Champ obligatoire';
+                }
+
+                if(!values.postal) {
+                    errors.postal = 'Champ obligatoire';
+                }
+                if(!values.city) {
+                    errors.city = 'Champ obligatoire';
+                }
+                if(!values.adresse) {
+                    errors.adresse = 'Champ obligatoire';
+                }
+                if(!values.name) {
+                    errors.name = 'Champ obligatoire';
+                }
+                if(!values.lastName) {
+                    errors.lastName = 'Champ obligatoire';
+                }
+                
+                
+                
+                
+
+              
+
+                return errors;
+            }}
             onSubmit={handleSubmit}
-            
+
         >
             {(formik) => (
                 <Form>
